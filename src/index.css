@@ -1,0 +1,203 @@
+/* src/index.css - Final Clean Styles */
+:root {
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #02030a;
+  color: #fff;
+}
+
+#root { width: 100%; min-height: 100vh; }
+
+/* 2D UI 覆盖层 */
+.ui-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 40px; box-sizing: border-box; z-index: 10;
+}
+
+.ui-element { pointer-events: auto; }
+
+/* 头部标题增强 */
+.header h1 {
+    font-size: 2.8rem; font-weight: 400; letter-spacing: 5px; text-transform: uppercase; margin: 0;
+}
+.header h2 {
+    font-size: 0.9rem; font-weight: 400; letter-spacing: 10px; opacity: 0.8; margin-top: 5px;
+}
+
+/* 切换按钮 */
+.toggle-btn {
+  position: absolute; top: 40px; right: 40px;
+  background: transparent; border: 1px solid currentColor;
+  padding: 10px 20px; font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; font-weight: 400; letter-spacing: 2px;
+  cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+}
+.toggle-btn:hover {
+  background: rgba(128, 128, 128, 0.1); box-shadow: 0 0 10px currentColor; 
+}
+
+/* 详情面板 */
+.details-panel {
+  position: absolute; top: 50%; right: 50px; transform: translateY(-50%);
+  width: 320px; padding: 30px; border-left: 3px solid;
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* HUD 提示框 (左下角) */
+.hud-prompt {
+    position: absolute; bottom: 40px; left: 40px; width: 300px; padding: 20px;
+    font-size: 0.9rem; line-height: 1.5; border-left: 2px solid;
+    color: currentColor; background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    z-index: 20; pointer-events: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.8rem; letter-spacing: 3px; }
+  .header h2 { font-size: 0.7rem; letter-spacing: 5px; }
+  .toggle-btn { top: 20px; right: 20px; padding: 8px 16px; }
+  .details-panel { width: auto; left: 20px; right: 20px; bottom: 20px; top: auto; transform: none; border-left: none; border-top: 3px solid; padding: 20px; }
+  .hud-prompt { left: 20px; bottom: 20px; width: auto; }
+}
+
+.starry-sky {
+  background-color: #02030a;
+  background-image:
+    radial-gradient(1px 1px at 20px 20px, rgba(255,255,255,0.4), transparent 40%),
+    radial-gradient(1px 1px at 40px 60px, rgba(109,166,255,0.3), transparent 40%),
+    radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,0.25), transparent 40%);
+  background-size: 200px 200px;
+}
+
+.starry-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 4rem 1.5rem;
+  overflow-y: auto;
+  color: #fff;
+}
+
+.starry-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(42,71,154,0.4), transparent),
+              radial-gradient(circle at bottom, rgba(18,18,18,0.9), #030212);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.starry-content {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.starry-page--plain {
+  background: #010104;
+  background-image:
+    radial-gradient(1px 1px at 20px 20px, rgba(255,255,255,0.4), transparent 40%),
+    radial-gradient(1px 1px at 40px 60px, rgba(109,166,255,0.3), transparent 40%),
+    radial-gradient(1px 1px at 60px 40px, rgba(255,255,255,0.25), transparent 40%);
+  background-size: 200px 200px;
+}
+
+.glass-panel {
+  background: rgba(3, 3, 10, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left-width: 3px;
+  border-left-color: rgba(255, 255, 255, 0.4);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(10, 20, 60, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.eyebrow {
+  letter-spacing: 0.5rem;
+  font-size: 0.75rem;
+  color: #a6b8ff;
+  text-transform: uppercase;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.about-grid h3 {
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3rem;
+}
+
+.about-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-grid li {
+  margin-bottom: 0.35rem;
+  opacity: 0.85;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.ghost-btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  padding: 0.75rem 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 6px;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
+}
+
+.ghost-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+}
+
+.project-section {
+  margin-top: 1.5rem;
+}
+
+.project-section h3 {
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.project-section ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  line-height: 1.4;
+}
