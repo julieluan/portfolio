@@ -1,16 +1,18 @@
-# React + Vite
+# Portfolio + Cloudflare Worker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project uses Vite for the React front end and a Cloudflare Worker for lightweight API routes that can run close to users.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Run the UI and the worker side by side:
 
-## React Compiler
+1. `npm install`
+2. `npm run dev:worker` – starts the worker on `http://127.0.0.1:8787`
+3. In another terminal `npm run dev` – Vite proxies any request to `/api/worker/*` to the worker dev server
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Deploying
 
-## Expanding the ESLint configuration
+- `npm run build` – builds the static site into `dist/`
+- `npm run deploy:worker` – publishes the worker defined in `wrangler.json`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Set `VITE_WORKER_BASE_URL` before building if the worker lives on a different origin (for example `https://portfolio-worker.yourname.workers.dev`). When this variable is absent the UI will call relative paths so it can sit behind the same domain as the worker or rely on the local dev proxy.

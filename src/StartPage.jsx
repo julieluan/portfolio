@@ -3,6 +3,57 @@ import React from 'react';
 import { motion as Motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import WaveScene from './WaveScene'; 
+import useCloudflareWorker from './hooks/useCloudflareWorker';
+
+const WorkerStatus = () => {
+    const { data, status, error, refresh } = useCloudflareWorker();
+
+    const getMessage = () => {
+        if (status === 'loading' || status === 'idle') {
+            return 'Connecting to Cloudflare Worker...';
+        }
+        if (status === 'error') {
+            return `Worker error: ${error}`;
+        }
+        if (data?.message) {
+            return `Worker says: ${data.message}`;
+        }
+        return 'Worker connected.';
+    };
+
+    return (
+        <div
+            style={{
+                marginTop: '1.5rem',
+                fontSize: '0.85rem',
+                letterSpacing: '2px',
+                color: '#ccc',
+                textTransform: 'uppercase',
+                pointerEvents: 'auto',
+            }}
+        >
+            <span>{getMessage()}</span>
+            {status === 'error' && (
+                <button
+                    type="button"
+                    onClick={refresh}
+                    style={{
+                        marginLeft: '1rem',
+                        padding: '0.35rem 0.75rem',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        background: 'transparent',
+                        color: '#fff',
+                        fontSize: '0.75rem',
+                        letterSpacing: '2px',
+                        cursor: 'pointer',
+                    }}
+                >
+                    RETRY
+                </button>
+            )}
+        </div>
+    );
+};
 
 const StartPage = () => {
     const navigate = useNavigate();
@@ -89,6 +140,7 @@ const StartPage = () => {
                 >
                     ENTER ORBIT
                 </button>
+                <WorkerStatus />
             </div>
         </Motion.div>
     );
